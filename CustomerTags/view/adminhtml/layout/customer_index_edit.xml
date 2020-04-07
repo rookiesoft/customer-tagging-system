@@ -1,0 +1,13 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <referenceBlock name="customer_form">
+                <block class="RookieSoft\CustomerTags\Block\Adminhtml\Customer\Edit\Tab\Tags" name="customer_edit_tab_CustomerTags" >
+                    <action method="setTabLabel">
+                        <argument name="label" xsi:type="string">Customer CustomerTags</argument>
+                    </action>
+                </block>
+            </referenceBlock>
+        </referenceContainer>
+    </body>
+</page>

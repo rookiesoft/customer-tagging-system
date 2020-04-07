@@ -1,0 +1,228 @@
+<?php
+/**
+ * @var \RookieSoft\CustomerTags\Block\Adminhtml\GuestCustomer\View $block
+ */
+?>
+<style type="text/css">
+.admin__action-multiselect-crumb{
+    margin: 0.3rem -1px 0.3rem 0.3rem;
+}
+
+</style>
+<section class="admin__page-section">
+    <div class="rookiesoft__page-section-title">
+        <span class="title"><?= $block->escapeHtml(__('Customer Information')) ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item rookiesoft-information">
+
+            <div class="admin__page-section-item-title">
+                <span class="title">
+                    <?= $block->escapeHtml(__('Information')) ?>
+                </span>
+            </div>
+            <div class="admin__page-section-item-content">
+                <table class="admin__table-secondary rookiesoft-account-information">
+                    <tr>
+                        <th><?= $block->escapeHtml(__('E-Mail')) ?></th>
+                        <td><?= $block->escapeHtml($block->getEmailAdress()) ?></td>
+                    </tr>
+                    <tr>
+                        <th><?= $block->escapeHtml(__('Purchases made')) ?></th>
+                        <td><?= $block->escapeHtml($block->sumOrders()) ?></td>
+                    </tr>
+                    <tr>
+                        <th><?= $block->escapeHtml(__('Tags')) ?></th>
+                        <td><?= $block->escapeHtml($block->getTags()) ?></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="admin__page-section-item rookiesoft-view-account-information">
+            <div class="admin__page-section-item-title">
+                <span class="title">
+                    <?= $block->escapeHtml(__(' ')) ?>
+                </span>
+            </div>
+            <div class="admin__page-section-item-content">
+                <table class="admin__table-secondary rookiesoft-account-information">
+                    <tr>
+                        <th><?= $block->escapeHtml(__(' ')) ?></th>
+                        <td><?= $block->escapeHtml($block->getEmail()) ?></td>
+                    </tr>
+                    <tr>
+                        <th><?= $block->escapeHtml(__('Sales')) ?></th>
+                        <td><?= $block->escapeHtml($block->getPrice()) ?></td>
+                    </tr>
+                    <tr>
+                        <th><?= $block->escapeHtml(__(' ')) ?></th>
+                        <td><?= $block->escapeHtml($block->getEmail()) ?></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <!-- <div data-role="spinner" data-component="rookiesoft_customertags_guestcustomer_form.rookiesoft_customertags_guestcustomer_form" class="admin__form-loading-mask" style="display: none;">
+        <div class="spinner">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+    </div> -->
+    <div data-bind="scope: 'rookiesoft_customertags_guestcustomer_form.rookiesoft_customertags_guestcustomer_form'" class="entry-edit form-inline">
+        <div class="rookiesoft__page-section-title">
+            <span class="title"><?= $block->escapeHtml(__('Tags Form')) ?></span>
+        </div>
+        <div class="admin__fieldset-wrapper-content _hide">
+            <form class="form" action="<?php echo $this->getUrl("customertags/customer/save")?>" id="tag-form" method="post" data-hasrequired="* Required Fields">
+                <fieldset class="admin__fieldset">
+                    <div class="admin__field _disabled">
+                        <div class="admin__field-label" data-bind="visible: $data.labelVisible">
+                            <label>
+                                <span>Email</span>
+                            </label>
+                        </div>
+                        <div class="admin__field-control">
+                            <input class="admin__control-text" type="text"
+                                maxlength="255" value="<?= $block->escapeHtml($block->getEmailAdress()) ?>" disabled>
+                            <input class="admin__control-text" type="hidden"
+                            name="customer_email" maxlength="255" value="<?= $block->escapeHtml($block->getEmailAdress()) ?>">
+                            <input class="admin__control-text" type="hidden"
+                                name="entity_id" maxlength="255" value="<?= $block->escapeHtml($block->getCustomerId()) ?>">
+                        </div>
+                    </div>
+                    <div class="admin__field" data-bind="css: $data.additionalClasses, attr: {'data-index': index}, visible: visible" data-index="tagToCustomer">
+                        <div class="admin__field-label" data-bind="visible: $data.labelVisible">
+                            <label>
+                                <span>Select Tag</span>
+                            </label>
+                        </div>
+                    <div class="admin__field-control" id="dropdown">
+                        <div class="admin__action-multiselect-wrap action-select-wrap _active" tabindex="0">
+                            <div class="action-select admin__action-multiselect _active">
+                                <div class="admin__action-multiselect-text">Select...</div>
+                                <?php foreach($block->getSelectedTags() as $selectedTag){ ?>
+                                    <span class="admin__action-multiselect-crumb selected-tag">
+                                        <span class='<?=$selectedTag->getCode()?>'><?= $selectedTag->getLabel()?></span>
+                                        <button class="action-close" type="button">
+                                            <span class="action-close-text">Close</span>
+                                        </button>
+                                        <input name="tag[]" type="hidden" value='<?=$selectedTag->getCode()?>'>
+                                    </span>
+                                <?php } ?>
+                            </div>
+                            <div class="action-menu _active" id="dropdown-content" style="display: none;">
+                                <div class="admin__action-multiselect-search-wrap">
+                                    <input class="admin__control-text admin__action-multiselect-search" data-role="advanced-select-text" type="text" autofocus="true" id="search" onkeyup="filterFunction()">
+                                    <label class="admin__action-multiselect-search-label" >
+                                    </label>
+                                    <div
+                                    class="admin__action-multiselect-search-count" style="display: none;">1 options</div>
+                                </div>
+                                <ul class="admin__action-multiselect-menu-inner _root">
+                                    <?php foreach($block->tagsOptions() as $tag){ ?>
+                                        <li class="admin__action-multiselect-menu-inner-item _root" >
+                                            <div class="action-menu-item _last">
+                                                <label class="admin__action-multiselect-label">
+                                                    <span class="tag"><?= $tag->getLabel() ?></span>
+                                                    <input type="hidden" value="<?=$tag->getCode()?>">
+                                                </label>
+                                            </div>
+                                        </li>
+                                    <?php } ?>
+                                </ul>
+                                <div class="admin__action-multiselect-actions-wrap">
+                                    <button class="action-default" data-action="close-advanced-select" type="button" data-bind="click: outerClick">
+                                        <span data-bind="i18n: closeBtnLabel">Done</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <input name="form_key" type="hidden" value="<?php /* @escapeNotVerified */ echo $block->getFormKey(); ?>" />
+                    <input type="submit" class="scalable action-show-hide" style="" id="form_height" value="Save" />
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    if (jQuery('.admin__action-multiselect-crumb').length > 0) {
+            jQuery('.admin__action-multiselect-text').hide();
+        }else{
+            jQuery('.admin__action-multiselect-text').show();
+        }
+    jQuery('#dropdown').click(function() {
+        jQuery('#dropdown-content').toggle()
+        if (jQuery('.admin__action-multiselect-crumb').length > 0) {
+            jQuery('.admin__action-multiselect-text').hide();
+        }else{
+            jQuery('.admin__action-multiselect-text').show();
+        }
+    });
+    jQuery('.action-menu-item').hover(function(){
+        jQuery(this).addClass('_hover');
+    },
+    function(){
+        jQuery(this).removeClass('_hover');
+    }
+    );
+    jQuery('#search').hover(function(){
+        jQuery(this).focus();
+    });
+    jQuery('.action-menu-item').click(function(){
+        jQuery('#dropdown-content').hide()
+        var text = jQuery(this).children().text();
+        var value = jQuery('input', jQuery(this)).val();
+        console.log(jQuery('input', jQuery(this)));
+
+            jQuery('.admin__action-multiselect-text')
+            .after('<span class="admin__action-multiselect-crumb"><span class='+value+'>'+text+'</span><button class="action-close" type="button"><span class="action-close-text">Close</span></button><input name="tag[]" type="hidden" value='+value+'></span>');
+        if(jQuery('.'+value).length != 1){
+            jQuery('.'+value).parent().remove();
+        }
+        jQuery('.action-close').click(function(){
+            jQuery(this).parent().remove();
+        });
+        //var selected = '.'+value;
+        //console.log(jQuery('selected');
+        // if(jQuery('.'+value).length > 1){
+        //     jQuery(this).parent().remove();
+        // }
+
+    });
+    jQuery('.action-close').click(function(){
+        jQuery(this).parent().remove();
+    });
+    $menu = jQuery('#dropdown-content');
+
+    jQuery(document).mouseup(e => {
+       if (!$menu.is(e.target) // if the target of the click isn't the container...
+       && $menu.has(e.target).length === 0) // ... nor a descendant of the container
+        {
+            $menu.hide();
+        }
+    });
+});
+
+function filterFunction() {
+    var input, filter, a, i;
+    input = document.getElementById("search");
+    filter = input.value.toUpperCase();
+    div = document.getElementById("dropdown-content");
+    a = div.getElementsByClassName("admin__action-multiselect-menu-inner-item");
+    jQuery("admin__action-multiselect-search-count").show()
+    for (i = 0; i < a.length; i++) {
+        txtValue = a[i].textContent || a[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+            jQuery("admin__action-multiselect-search-count").show()
+        } else {
+            a[i].style.display = "none";
+        }
+    }
+    jQuery("admin__action-multiselect-search-count").toggle();
+}
+</script>
