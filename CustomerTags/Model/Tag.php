@@ -39,7 +39,7 @@ class Tag extends AbstractModel implements TagInterface, IdentityInterface
 
     /**
      * Get Code
-     * 
+     *
      * @return string|null
      */
     public function getTagCode()
@@ -49,7 +49,7 @@ class Tag extends AbstractModel implements TagInterface, IdentityInterface
 
     /**
      * Get Label
-     * 
+     *
      * @return string|null
      */
     public function getLabel()
@@ -59,7 +59,7 @@ class Tag extends AbstractModel implements TagInterface, IdentityInterface
 
     /**
      * Get Description
-     * 
+     *
      * @return string|null
      */
     public function getDescription()
@@ -69,14 +69,14 @@ class Tag extends AbstractModel implements TagInterface, IdentityInterface
 
     /**
      * Get State
-     * 
+     *
      * @return int|null
      */
     public function getState()
     {
         return $this->getData(self::STATE);
     }
-    
+
     /**
      * Return identities
      * @return string[]
@@ -121,7 +121,7 @@ class Tag extends AbstractModel implements TagInterface, IdentityInterface
 
     /**
      * set Description
-     * 
+     *
      * @param string $description
      * @return $this
      */

@@ -5,7 +5,7 @@ use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use RookieSoft\CustomerTags\Model\EntityTypeFactory;
 
-class EntityType implements DataPatchInterface
+class EntityTypeTable implements DataPatchInterface
 {
     public  function __construct(
         ModuleDataSetupInterface $moduleDataSetup,
@@ -35,6 +35,22 @@ class EntityType implements DataPatchInterface
                 'code'      => 'customer',
                 'type_name' => 'Customer',
                 'reference' => 'customer_entity'
+            ])
+            ->save();
+        $this->entityTypeFactory
+            ->create()
+            ->setData([
+                'code'      => 'order',
+                'type_name' => 'Order',
+                'reference' => 'sales_order'
+            ])
+            ->save();
+        $this->entityTypeFactory
+            ->create()
+            ->setData([
+                'code'      => 'tag_rule',
+                'type_name' => 'Tag Rule',
+                'reference' => 'rookiesoft_customertags_tag_rule'
             ])
             ->save();
     }

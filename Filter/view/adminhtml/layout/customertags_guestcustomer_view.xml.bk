@@ -6,13 +6,6 @@
         </title>
     </head>
     <body>
-       <!--  <referenceContainer name="content">
-            <block
-                class="Magento\Backend\Block\Template"
-                name="tags_guestcustomer_view"
-                template="rookiesoft_customertags::View.phtml"
-            />
-        </referenceContainer> -->
         <referenceContainer name="content">
             <block
                 class="RookieSoft\CustomerTags\Block\Adminhtml\GuestCustomer\View"

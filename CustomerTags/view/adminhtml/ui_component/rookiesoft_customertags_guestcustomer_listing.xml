@@ -32,6 +32,7 @@
         <filters name="listing_filters">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="filterOptions" xsi:type="boolean">true</item>
                     <!-- <item name="templates" xsi:type="array"> -->
                         <item name="filters" xsi:type="array">
                             <item name="select" xsi:type="array">

@@ -27,5 +27,14 @@
             dependsOnModule="RookieSoft_CustomerTags"
             action="customertags/tags/index"
             resource="RookieSoft_CustomerTags::tags"/>
+        <add id="RookieSoft_CustomerTags::tag_rule"
+            title="Tag Rule"
+            translate="title"
+            module="RookieSoft_CustomerTags"
+            parent="Magento_CatalogRule::promo"
+            sortOrder="80"
+            dependsOnModule="RookieSoft_CustomerTags"
+            action="customertags/tagrule_rule/"
+            resource="RookieSoft_CustomerTags::rule"/>
         </menu>
 </config>

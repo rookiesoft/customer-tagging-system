@@ -10,16 +10,6 @@ class GuestOrders extends AbstractDataProvider
 {
     protected $_resource;
 
-    /**
-     * [__construct description]
-     * @param           $name
-     * @param           $primaryFieldName
-     * @param           $requestFieldName
-     * @param ResourceConnection $resource
-     * @param CollectionFactory  $salesOrderCollectionFactory
-     * @param array              $meta
-     * @param array              $data
-     */
     public function __construct(
         $name,
         $primaryFieldName,

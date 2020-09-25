@@ -33,9 +33,6 @@ class Save extends \Magento\Backend\App\Action
             $this->_redirect('customertags/tags/addrow');
             return;
         }
-        // echo "<pre>";
-        // echo print_r($data, true);
-        // exit;
         try {
             $rowData = $this->tagFactory->create();
 
@@ -43,11 +40,6 @@ class Save extends \Magento\Backend\App\Action
                 $rowData->load($data['id']);
             }
             $rowData->setData($data);
-
-            // echo '<pre>';
-            // print_r($rowData->toArray());
-            // exit;
-
             $rowData->save();
 
             $this->messageManager->addSuccess(__('Row data has been successfully saved.'));
@@ -56,16 +48,6 @@ class Save extends \Magento\Backend\App\Action
         }
         $this->_redirect('customertags/tags/index');
     }
-    /*
-    $Tag = Mage::getModel('tags/tag');
-
-    if( $id ) {
-        $Tag->load( $id );
-    }
-
-    $Tag->setData($dataFromServerRequest)
-        ->save();
-      */
     /**
      * @return bool
      */

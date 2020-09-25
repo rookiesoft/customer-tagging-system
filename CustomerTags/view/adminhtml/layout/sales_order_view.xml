@@ -1,8 +1,12 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <referenceContainer name="extra_customer_info">
-            <block class="RookieSoft\CustomerTags\Block\Adminhtml\Order\View\CustomerTags" name="sales_order_view_customer_tags" template="order/view/customer-tags.phtml" />
-        </referenceContainer>
+        <referenceBlock name="sales_order_tabs">
+             <block class="RookieSoft\CustomerTags\Block\Adminhtml\OrderEdit\Tab\View" name="order_tags" template="order/view/tab/order_tags.phtml"/>
+            <action method="addTab">
+                <argument name="name" xsi:type="string">Customer_tags_order</argument>
+                <argument name="block" xsi:type="string">order_tags</argument>
+            </action>
+        </referenceBlock>
     </body>
 </page>
